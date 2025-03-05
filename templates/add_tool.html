@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新增小工具</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="modal">
+        <form action="{{ url_for('add_tool') }}" method="post" enctype="multipart/form-data">
+            <label>图片 (100×100px):</label>
+            <input type="file" name="image" required>
+            <label>链接:</label>
+            <input type="url" name="link" required>
+            <label>标题 (最多12个中文字符):</label>
+            <input type="text" name="title" maxlength="12" required>
+            <button type="submit">提交</button>
+            <a href="{{ url_for('index') }}"><button type="button">取消</button></a>
+        </form>
+    </div>
+</body>
+</html>
