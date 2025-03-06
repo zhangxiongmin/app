@@ -9,7 +9,7 @@
 <body>
     <div class="modal">
         <form action="{{ url_for('add_tool') }}" method="post" enctype="multipart/form-data">
-            <label>图片 (100×100px):</label>
+            <label>图片 (1:1比例, 自动调整至200×200):</label>
             <input type="file" name="image" required>
             <label>链接:</label>
             <input type="url" name="link" required>

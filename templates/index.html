@@ -21,7 +21,7 @@
             {% for tool in tools %}
             <div class="tool-item">
                 <a href="{{ url_for('tool_redirect', tool_id=tool['id']) }}">
-                    <img src="{{ url_for('static', filename='uploads/' ~ tool['image']) }}" width="100" height="100" alt="{{ tool['title'] }}">
+                    <img src="{{ url_for('static', filename='uploads/' ~ tool['image']) }}" width="200" height="200" alt="{{ tool['title'] }}">
                     <div>{{ tool['title'] }}</div>
                 </a>
             </div>
@@ -36,7 +36,7 @@
     <!-- 新增工具弹窗，默认隐藏 -->
     <div class="modal" id="modal" style="display:none;">
         <form id="addToolForm" action="{{ url_for('add_tool') }}" method="post" enctype="multipart/form-data">
-            <label>图片 (100×100px):</label>
+            <label>图片 (1:1比例, 自动调整至200×200):</label>
             <input type="file" name="image" required>
             <label>链接:</label>
             <input type="url" name="link" required>
@@ -72,7 +72,7 @@
             var div = document.createElement('div');
             div.className = 'tool-item';
             div.innerHTML = `<a href="/tool/${tool.id}">
-              <img src="{{ url_for('static', filename='uploads') }}/${tool.image}" width="100" height="100" alt="${tool.title}">
+              <img src="{{ url_for('static', filename='uploads') }}/${tool.image}" width="200" height="200" alt="${tool.title}">
               <div>${tool.title}</div>
             </a>`;
             container.insertBefore(div, container.firstChild);

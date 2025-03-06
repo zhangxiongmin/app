@@ -50,12 +50,15 @@ def add_tool():
             file.save(filepath)
             try:
                 img = Image.open(filepath)
-                if img.size != (100, 100):
+                if img.width != img.height:
                     os.remove(filepath)
-                    flash("图片尺寸必须为100×100px")
+                    flash("需要提供1:1图片，不低于200*200像素")
                     return redirect(request.url)
+                # 自动调整图片为200×200像素，扩大或缩小均可
+                img = img.resize((200, 200), Image.LANCZOS)
+                img.save(filepath)
             except Exception:
-                flash("为节约服务器资源，请提供100*100像素图片")
+                flash("需要提供1:1图片，不低于200*200像素")
                 return redirect(request.url)
             conn = get_db_connection()
             conn.execute("INSERT INTO tools (title, link, image) VALUES (?, ?, ?)", (title, link, filename))
@@ -122,11 +125,14 @@ def api_add_tool():
         file.save(filepath)
         try:
             img = Image.open(filepath)
-            if img.size != (100, 100):
+            if img.width != img.height:
                 os.remove(filepath)
-                return {"success": False, "message": "图片尺寸必须为100×100px"}
+                return {"success": False, "message": "需要提供1:1图片，不低于200*200像素"}
+            # 自动调整图片为200×200像素，扩大或缩小均可
+            img = img.resize((200, 200), Image.LANCZOS)
+            img.save(filepath)
         except Exception:
-            return {"success": False, "message": "为节约服务器资源，请提供100*100像素图片"}
+            return {"success": False, "message": "需要提供1:1图片，不低于200*200像素"}
         conn = get_db_connection()
         cur = conn.execute("INSERT INTO tools (title, link, image) VALUES (?, ?, ?)", (title, link, filename))
         new_id = cur.lastrowid
