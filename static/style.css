@@ -17,11 +17,12 @@ h1 {
 header h1 {
     text-align: center;
     margin: 40px 0 20px;
-    font-size: 2em;
+    font-size: 1.8em; /* slightly smaller */
+    color: #ffffff; /* use white font */
 }
 header h1 a {
-    text-decoration: none;
-    color: inherit;
+    text-decoration: none; /* remove underline */
+    color: #ffffff; /* white font */
 }
 
 /* 搜索栏美化 */
@@ -68,9 +69,15 @@ header h1 a {
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     transition: transform 0.3s;
+    color: #e0e0e0; /* explicitly set light font color */
+    font-size: 16px; /* adjust font size if needed */
 }
 .tool-item:hover { 
     transform: translateY(-5px);
+}
+.tool-item a {
+    color: #e0e0e0; /* set light font color for links */
+    text-decoration: none; /* remove underline */
 }
 
 /* 浮动添加按钮美化 */
